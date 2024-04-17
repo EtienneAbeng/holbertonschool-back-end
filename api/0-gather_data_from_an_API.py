@@ -1,8 +1,16 @@
+#!/usr/bin/python3
+
 import requests  # Pour les requêtes HTTP
 import sys  # Pour accéder aux arguments de ligne de commande
 
 
 def get_employee_tasks(employee_id):
+    """
+    Fonction pour récupérer et afficher les tâches d'un employé.
+    
+    Args:
+        employee_id (int): L'ID de l'employé dont on veut récupérer les tâches.
+    """
     URL = "https://jsonplaceholder.typicode.com"  # URL de l'API
     try:
         response = requests.get("{}/users/{}/todos".format(URL, employee_id), params={
@@ -37,5 +45,5 @@ if __name__ == "__main__":
         sys.exit(1)  # Arrêt du programme avec un code d'erreur
 
     employee_id = sys.argv[1]  # Récupération de l'ID de l'employé
-    # Appel de la fonction pour récupérer les tâches
+    # Appel de la fonction pour récupérer les tâches de l'employé
     get_employee_tasks(employee_id)
