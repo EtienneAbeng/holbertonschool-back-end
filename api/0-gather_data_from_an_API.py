@@ -7,7 +7,7 @@ import sys  # Pour accéder aux arguments de ligne de commande
 def get_employee_tasks(employee_id):
     """
     Fonction pour récupérer et afficher les tâches d'un employé.
-    
+
     Args:
         employee_id (int): L'ID de l'employé dont on veut récupérer les tâches.
     """
