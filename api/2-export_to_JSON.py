@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import requests  # Module pour les requêtes HTTP
 import json  # Module pour la manipulation de JSON
 import sys  # Module pour accéder aux arguments de ligne de commande
