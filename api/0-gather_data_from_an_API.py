@@ -13,8 +13,10 @@ def get_employee_tasks(employee_id):
     """
     URL = "https://jsonplaceholder.typicode.com"  # URL de l'API
     try:
-        response = requests.get("{}/users/{}/todos".format(URL, employee_id), 
-        params={"_expand": "user"})  # Récupération des tâches de l'employé
+        response = requests.get(
+            "{}/users/{}/todos".format(URL, employee_id),
+            params={"_expand": "user"}
+        )
         response.raise_for_status()  # Vérifie si la requête a réussi
         data = response.json()  # Extraction des données JSON
 
@@ -24,15 +26,17 @@ def get_employee_tasks(employee_id):
         completed_tasks = []  # Titres des tâches terminées
 
         for task in data:  # Parcours des tâches
-            if task["completed"]:  # Si la tâche est terminée
-                num_completed_tasks += 1  # Incrémente compteur 
+            if task["completed"]:
+                num_completed_tasks += 1  # Incrémente compteur
                 # Ajout du titre de la tâche
                 completed_tasks.append(task["title"])
 
-        print("Employee {} is done with tasks ({}/{})".format(employee_name,
-              num_completed_tasks, total_tasks))  # Affichage du résultat
+            print("Employee {} is done with tasks ({}/{})".format(
+                employee_name, num_completed_tasks, total_tasks))
+
         for title in completed_tasks:  # Affichage titres tâches terminées
             print("\t ", title)
+
     except requests.exceptions.RequestException as e:  # Gestion des erreurs
         print("An error occurred:", e)  # Affichage de l'erreur
         sys.exit(1)  # Arrêt du programme avec un code d'erreur
