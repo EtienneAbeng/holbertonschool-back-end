@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import requests  # Pour les requêtes HTTP
 import sys  # Pour accéder aux arguments de ligne de commande
 
@@ -31,8 +29,8 @@ def get_employee_tasks(employee_id):
                 # Ajout du titre de la tâche
                 completed_tasks.append(task["title"])
 
-            print("Employee {} is done with tasks ({}/{})".format(
-                employee_name, num_completed_tasks, total_tasks))
+        print("Employee {} is done with tasks ({}/{})".format(
+            employee_name, num_completed_tasks, total_tasks))
 
         for title in completed_tasks:  # Affichage titres tâches terminées
             print("\t ", title)
