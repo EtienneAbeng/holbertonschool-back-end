@@ -38,7 +38,7 @@ def export_to_csv(employee_id, tasks):
 
 def get_employee_tasks(employee_id):
     """
-    Récupère les tâches de l'employé à partir de l'API et les exporte au format CSV.
+    Récupère tâches de l'employé depuis l'API et les exporte au format CSV.
 
     Args:
         employee_id (str): L'ID de l'employé.
@@ -50,13 +50,15 @@ def get_employee_tasks(employee_id):
     try:
         # Requête GET pour récupérer les tâches de l'employé avec son ID
         response = requests.get(
-            "{}/users/{}/todos".format(URL, employee_id), params={"_expand": "user"})
+            "{}/users/{}/todos".format(URL, employee_id),
+            params={"_expand": "user"})
         response.raise_for_status()  # Vérification du statut de la réponse
         tasks = response.json()  # Conversion de la réponse en JSON
 
         # Export des données vers un fichier CSV
         export_to_csv(employee_id, tasks)
-    except requests.exceptions.RequestException as e:  # Gestion des exceptions liées aux requêtes HTTP
+        # Gestion des exceptions liées aux requêtes HTTP
+    except requests.exceptions.RequestException as e:
         print("An error occurred:", e)  # Affichage de l'erreur
         sys.exit(1)  # Arrêt du programme en cas d'erreur
 
