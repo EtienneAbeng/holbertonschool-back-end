@@ -18,7 +18,7 @@ def get_employee_tasks(employee_id):
         response.raise_for_status()  # Vérifie si la requête a réussi
         data = response.json()  # Extraction des données JSON
 
-        employee_name = data[0]["user"]["name"]  # Nom de l'employé
+        EMPLOYEE_NAME = data[0]["user"]["name"]  # Nom de l'employé
         TOTAL_NUMBER_OF_TASKS = len(data)  # Nombre total de tâches
         NUMBER_OF_DONE_TASKS = 0  # Nombre de tâches terminées
         TASK_TITLE = []  # Titres des tâches terminées
@@ -29,7 +29,7 @@ def get_employee_tasks(employee_id):
                 # Ajout du titre de la tâche
                 TASK_TITLE.append(task["title"])
 
-        print(f"Employee {employee_name} is done with tasks ({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}):")
+        print(f"Employee {EMPLOYEE_NAME} is done with tasks ({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}):")
 
         for title in TASK_TITLE:  # Affichage titres tâches terminées
             print("\t", title)
