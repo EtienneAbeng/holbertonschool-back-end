@@ -12,7 +12,8 @@ def get_employee_tasks(employee_id):
     URL = "https://jsonplaceholder.typicode.com"  # URL de l'API
     try:
         response = requests.get(
-            "{}/users/{}/todos".format(URL, employee_id),
+            # Formatage de l'URL avec f-string
+            f"{URL}/users/{employee_id}/todos",
             params={"_expand": "user"}
         )
         response.raise_for_status()  # Vérifie si la requête a réussi
@@ -29,11 +30,12 @@ def get_employee_tasks(employee_id):
                 # Ajout du titre de la tâche
                 completed_tasks.append(task["title"])
 
-        print("Employee {} is done with tasks ({}/{})".format(
-            employee_name, num_completed_tasks, total_tasks))
+        # Affichage du nombre de tâches terminées et du nombre total de tâches
+        print(
+            f"Employee {employee_name} is done with tasks ({num_completed_tasks}/{total_tasks}):")
 
         for title in completed_tasks:  # Affichage titres tâches terminées
-            print("\t ", title)
+            print("\t", title)
 
     except requests.exceptions.RequestException as e:  # Gestion des erreurs
         print("An error occurred:", e)  # Affichage de l'erreur
