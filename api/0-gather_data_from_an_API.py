@@ -12,29 +12,26 @@ def get_employee_tasks(employee_id):
     URL = "https://jsonplaceholder.typicode.com"  # URL de l'API
     try:
         response = requests.get(
-            # Formatage de l'URL avec f-string
-            f"{URL}/users/{employee_id}/todos",
+            "{}/users/{}/todos".format(URL, employee_id),
             params={"_expand": "user"}
         )
         response.raise_for_status()  # Vérifie si la requête a réussi
         data = response.json()  # Extraction des données JSON
 
         employee_name = data[0]["user"]["name"]  # Nom de l'employé
-        total_tasks = len(data)  # Nombre total de tâches
-        num_completed_tasks = 0  # Nombre de tâches terminées
-        completed_tasks = []  # Titres des tâches terminées
+        TOTAL_NUMBER_OF_TASKS = len(data)  # Nombre total de tâches
+        NUMBER_OF_DONE_TASKS = 0  # Nombre de tâches terminées
+        TASK_TITLE = []  # Titres des tâches terminées
 
         for task in data:  # Parcours des tâches
             if task["completed"]:
-                num_completed_tasks += 1  # Incrémente compteur
+                NUMBER_OF_DONE_TASKS += 1  # Incrémente compteur
                 # Ajout du titre de la tâche
-                completed_tasks.append(task["title"])
+                TASK_TITLE.append(task["title"])
 
-        # Affichage du nombre de tâches terminées et du nombre total de tâches
-        print(
-            f"Employee {employee_name} is done with tasks ({num_completed_tasks}/{total_tasks}):")
+        print(f"Employee {employee_name} is done with tasks ({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}):")
 
-        for title in completed_tasks:  # Affichage titres tâches terminées
+        for title in TASK_TITLE:  # Affichage titres tâches terminées
             print("\t", title)
 
     except requests.exceptions.RequestException as e:  # Gestion des erreurs
