@@ -21,18 +21,19 @@ def get_employee_tasks(employee_id):
         EMPLOYEE_NAME = data[0]["user"]["name"]  # Nom de l'employé
         TOTAL_NUMBER_OF_TASKS = len(data)  # Nombre total de tâches
         NUMBER_OF_DONE_TASKS = 0  # Nombre de tâches terminées
-        TASK_TITLE = []  # Titres des tâches terminées
+        COMPLETED_TASKS = []  # Titres des tâches terminées
 
         for task in data:  # Parcours des tâches
             if task["completed"]:
                 NUMBER_OF_DONE_TASKS += 1  # Incrémente compteur
                 # Ajout du titre de la tâche
-                TASK_TITLE.append(task["title"])
+                COMPLETED_TASKS.append(task["title"])
 
-        print(f"Employee {EMPLOYEE_NAME} is done with tasks ({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}):")
+        print("Employee {} is done with tasks ({}/{})".format(
+            EMPLOYEE_NAME, NUMBER_OF_DONE_TASKS, TOTAL_NUMBER_OF_TASKS))
 
-        for title in TASK_TITLE:  # Affichage titres tâches terminées
-            print("\t", title)
+        for title in COMPLETED_TASKS:  # Affichage titres tâches terminées
+            print("\t ", title)
 
     except requests.exceptions.RequestException as e:  # Gestion des erreurs
         print("An error occurred:", e)  # Affichage de l'erreur
@@ -45,6 +46,6 @@ if __name__ == "__main__":
         print("Missing employee ID as argument")
         sys.exit(1)  # Arrêt du programme avec un code d'erreur
 
-    employee_id = sys.argv[1]  # Récupération de l'ID de l'employé
+    EMPLOYEE_ID = sys.argv[1]  # Récupération de l'ID de l'employé
     # Appel de la fonction pour récupérer les tâches de l'employé
-    get_employee_tasks(employee_id)
+    get_employee_tasks(EMPLOYEE_ID)
