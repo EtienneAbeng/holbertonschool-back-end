@@ -5,6 +5,6 @@
 import math  # import the math module
 
 
-def floor(n: int | float) -> int:  # type hinting
+def floor(n: float) -> int:  # type hinting
     """ Return the floor of the float """
     return math.floor(n)
